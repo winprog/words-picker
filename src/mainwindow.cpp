@@ -535,7 +535,7 @@ void MainWindow::onFloatButtonClicked() {
     who_query = Requestor::FloatButtonE;
     float_browser->browser->setText(tr("正在查询"));
     query();
-    float_browser->move(QCursor::pos().x() - 10, QCursor::pos().y() - 10);
+    float_browser->move(QCursor::pos().x(), QCursor::pos().y());
 
     INFO << "Show the float browser";
 //    float_browser->setVisible(true);

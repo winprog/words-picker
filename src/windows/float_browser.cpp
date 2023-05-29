@@ -29,14 +29,17 @@
 FloatBrowser::FloatBrowser()
 {
     setWindowTitle(tr("快速查词"));
-    setFixedSize(280,300);
+    int width = 600;
+    int height = 600;
+    
+    setFixedSize(width,height);
     setWindowFlags(Qt::Dialog);
 
     input = new QLineEdit(this);
     input->setGeometry(0,0,190,30);
 
     browser = new QTextBrowser(this);
-    browser->setGeometry(0,30,280,240);
+    browser->setGeometry(0,30,width,height-60);
     INFO << "Float_browser object creating" << browser->size();
 
     btn_query = new QPushButton(this);
@@ -49,7 +52,7 @@ FloatBrowser::FloatBrowser()
 //    add_new->adjustSize();
 
     google_translate = new QPushButton(this);
-    google_translate->setGeometry(100, 270, 80, 30);
+    google_translate->setGeometry(280, 0, 180, 30);
     google_translate->setText(tr("Google翻译"));
 
     signal_slot();
@@ -97,7 +100,9 @@ void FloatBrowser::google_web_translate(QString src_word,
     if (des_language == "EN") des_language = "en";
 
     INFO << "源语言：" << src_language << "\n目标语言：" << des_language;
-    QUrl google_url(tr("https://translate.google.cn/#%1/%2/%3")
+    // https://translate.google.com.hk/?hl=zh-CN&sourceid=cnhp&sl=auto&tl=zh-CN&text=time&op=translate
+    // QUrl google_url(tr("https://translate.google.cn/#%1/%2/%3")
+    QUrl google_url(tr("https://translate.google.com.hk/?hl=%1&sourceid=cnhp&sl=auto&tl=%2&text=%3&op=translate")
                     .arg(src_language)
                     .arg(des_language)
                     .arg(src_word));

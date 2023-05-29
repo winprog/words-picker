@@ -26,7 +26,7 @@
 
 FloatButton::FloatButton()
 {
-    setFixedSize(30, 30);
+    setFixedSize(60, 60);
     // 设置窗口透明
     setAttribute(Qt::WA_TranslucentBackground, true);
     // 设置无边框, 以及不获得焦点
