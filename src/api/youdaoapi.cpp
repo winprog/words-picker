@@ -69,6 +69,35 @@ void YoudaoAPI::translate(QString query, QString from, QString to)
     request();
 }
 
+void YoudaoAPI::translate_by_dict_youdao(QString query, QString from, QString to)
+{ 
+     // 处理pdf换行单词被打断的问题
+    query.replace("-\n", "");
+
+    query = query.simplified();
+    QString query_encode = QUrl::toPercentEncoding(query);
+    QString query_url;
+
+    query_url = "https://dict.youdao.com/suggest?num=3&ver=3.0&doctype=json&cache=false&le=en&";
+
+    query_url.append("q=" + query_encode);
+    INFO << "Encoded url: " << query_url;
+    this->query_url = query_url;
+    request();  
+}
+
+void YoudaoAPI::translate_by_iciba(QString query)
+{
+    query.replace("-\n", "");
+    query = query.simplified();
+    QString query_encode = QUrl::toPercentEncoding(query);
+
+    QString query_url = "https://www.iciba.com/_next/data/R1FlAvEQdbeRu8KNva9oA/word.json?w=" + query_encode;
+    INFO << "query url: " << query_url;
+    this->query_url = query_url;
+    request();
+}
+
 void YoudaoAPI::request()
 {
     QNetworkAccessManager *manager;

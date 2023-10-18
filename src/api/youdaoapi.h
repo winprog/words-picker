@@ -17,6 +17,8 @@ public:
                       QString appKey = "179b7fabf47afb85",
                       QString key = "ndTLw0HSgoUhkpgP0jGK7ynUI1KHFwcd");
     void translate(QString query, QString from, QString to);
+    void translate_by_dict_youdao(QString query, QString from, QString to);
+    void translate_by_iciba(QString query);
     void request();
     Result *result;
 

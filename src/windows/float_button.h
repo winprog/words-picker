@@ -38,6 +38,8 @@ private:
 
 protected:
     void mousePressEvent(QMouseEvent *);
+    void mouseMoveEvent(QMouseEvent *);
+    
 
 signals:
     void pressed();

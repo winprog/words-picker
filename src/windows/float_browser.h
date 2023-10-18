@@ -34,6 +34,7 @@ public:
     ~FloatBrowser();
     QTextBrowser *browser;
     QPushButton *google_translate;
+    QPushButton *btn_voice;
     QPushButton *btn_query;
     QPushButton *add_new;
     QLineEdit *input;
@@ -41,6 +42,7 @@ public:
     void google_web_translate(QString src_word,
                               QString src_language = "en",
                               QString des_language = "zh-CN");
+    void play_tts(QString *input);
 private:
     void signal_slot();
 private slots:

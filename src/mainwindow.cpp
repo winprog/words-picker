@@ -313,6 +313,12 @@ void MainWindow::signalsAndSlots()
                                             des_language->currentText());
     });
 
+    connect(float_browser->btn_voice, &QPushButton::clicked,
+            this, [=]{
+        INFO << float_browser->input->text();
+        float_browser->play_tts(&src_word);
+    });
+
 //------Response the "about"
     connect(about, &QPushButton::clicked,
             this, &MainWindow::showAbout);
@@ -454,9 +460,13 @@ void MainWindow::trayIconActived(QSystemTrayIcon::ActivationReason reason)
 void MainWindow::query()
 {
 //    查询
-    youdao_api->translate(src_word,
+#if 1
+    youdao_api->translate_by_dict_youdao(src_word,
                           src_language->currentText(),
                           des_language->currentText());
+#else
+    youdao_api->translate_by_iciba(src_word);
+#endif
 }
 
 void MainWindow::onReplyGot()
@@ -542,6 +552,7 @@ void MainWindow::onFloatButtonClicked() {
     float_browser->show();
 
     //line_edit of float_browser get focus, then wait for the query reply
+    INFO << "Setting input text: " << src_word;
     float_browser->input->setText(src_word);
     float_browser->input->selectAll();
     float_browser->input->setFocus();

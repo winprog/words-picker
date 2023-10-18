@@ -48,6 +48,12 @@ void FloatButton::mousePressEvent(QMouseEvent *event)
     }
 }
 
+void FloatButton::mouseMoveEvent(QMouseEvent *event)
+{
+    emit pressed();
+    this->hide();
+}
+
 
 void FloatButton::paintEvent(QPaintEvent *)
 {

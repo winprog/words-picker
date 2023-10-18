@@ -24,6 +24,8 @@
 #include <QApplication>
 #include <QClipboard>
 #include <QDesktopServices>
+// #include <QSound>
+#include "../api/play_url.h"
 #include "../defined.h"
 
 FloatBrowser::FloatBrowser()
@@ -55,12 +57,18 @@ FloatBrowser::FloatBrowser()
     google_translate->setGeometry(280, 0, 180, 30);
     google_translate->setText(tr("Google翻译"));
 
+    // add a button to read the query out.
+    btn_voice = new QPushButton(this);
+    btn_voice->setGeometry(465, 0, 80, 30);
+    btn_voice->setText(tr("读"));
+
     signal_slot();
 }
 
 FloatBrowser::~FloatBrowser() {
 
 }
+
 
 void FloatBrowser::signal_slot()
 {
@@ -85,6 +93,19 @@ bool FloatBrowser::isMouseOn()
     }
     DEBUG << "Mouse out of the browser";
     return false;
+}
+
+void FloatBrowser::play_tts(QString *input)
+{
+#if 1
+    INFO << "tts: " << input->toUtf8().data();
+    QString url = tr("https://dict.youdao.com/dictvoice?audio=%1&type=2").arg(input->toUtf8().data());
+    INFO << "audio url: " << url;
+    play_audio_url(url.toUtf8().data());
+#endif
+    
+    // QString url = "https://dict.youdao.com/dictvoice?audio=input&type=2";
+    // QSound::play(url);
 }
 
 void FloatBrowser::google_web_translate(QString src_word,
@@ -121,6 +142,6 @@ void FloatBrowser::hideEvent(QHideEvent *event)
 {
     // 按过最小化按钮之后就无法再次显示了
     INFO << "Minimize clicked, hide the float window";
-    this->close();
-    event->ignore();
+    // this->close();
+    // event->ignore();
 }
