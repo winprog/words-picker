@@ -500,6 +500,8 @@ void MainWindow::show_result(QString query, QString res)
     default:
         float_browser->input->setText(query);
         float_browser->browser->setText(res);
+        float_browser->setWindowFlags(Qt::WindowStaysOnTopHint);
+        float_browser->show();
     }
 }
 
